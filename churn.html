@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Monero Churn Timer</title>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      padding-top: 30px; /* Adjust padding to fine-tune position */
+      font-family: 'Arial', sans-serif;
+      background-color: #f0f0f0;
+    }
+    header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    header img {
+      height: 80px;
+      margin: 0 10px;
+    }
+    header h1 {
+      font-size: 48px;
+      margin: 0;
+    }
+    h2 {
+      font-size: 64px;
+      text-align: center;
+      line-height: 1.2;
+      max-width: 60%;
+      word-wrap: break-word;
+    }
+    .highlight {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="https://www.getmonero.org/press-kit/symbols/monero-symbol-480.png" alt="Monero Logo">
+    <h1>Monero Churn Timer</h1>
+    <img src="https://www.getmonero.org/press-kit/symbols/monero-symbol-480.png" alt="Monero Logo">
+  </header>
+
+  <h2>Number of days you need to wait before next churn:<br>
+    <span class="highlight" id="days"></span>
+    <span class="highlight">days(</span>
+    <span class="highlight" id="blocks"></span>
+    <span class="highlight">blocks)</span>
+  </h2>
+
+  <script>
+    // Box-Muller Transform for normally distributed random numbers
+    function randomNormal(mean = 0, stdDev = 1) {
+      const u1 = Math.random();
+      const u2 = Math.random();
+      const z0 = Math.sqrt(-2.0 * Math.log(u1)) * Math.cos(2.0 * Math.PI * u2);
+      return z0 * stdDev + mean;
+    }
+
+    // Log-normal random number generator using the shape and scale parameters
+    function logNormRnd(shape, scale) {
+      const normalValue = randomNormal(0, shape); // Mean = 0, StdDev = shape (sigma)
+      return Math.exp(normalValue) * scale;
+    }
+
+    const days = logNormRnd(2.135, 1.77).toFixed(3);
+    const blocks = Math.floor(days * 720);
+
+    document.getElementById('days').textContent = days;
+    document.getElementById('blocks').textContent = blocks;
+  </script>
+</body>
+</html>
