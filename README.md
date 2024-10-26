@@ -39,11 +39,21 @@ const days = logNormRnd(2.135, 1.77).toFixed(3);
 const blocks = Math.floor(days * 720);
 ```
 
-The **Box-Muller Transform** generates normally distributed random values, which are then converted into lognormal values for realistic churn intervals. Each time the page is refreshed, **a new wait time is displayed**.
+Additionally, the logic for generating churn wait times is also available as a **Python script** in `monero_churn_timer.py`:
+
+```python
+from scipy.stats import lognorm
+
+days_to_wait_before_next_churn = lognorm.rvs(2.135, loc=0, scale=1.77, size=1)[0]
+print(days_to_wait_before_next_churn)
+```
+
+This Python script utilizes `scipy` to generate a lognormal random value representing the number of days to wait before the next churn.
 
 ## 📂 Project Structure
 
 - **`churn.html`** – Core page for generating and displaying the random churn interval.
+- **`monero_churn_timer.py`** – Python script for generating lognormal churn intervals via `scipy`.
 - **JavaScript Logic** – Responsible for calculating wait times in days and converting them into blocks (Monero has ~720 blocks per day).
 - **Styling** – Custom CSS for a simple and intuitive user interface.
 
