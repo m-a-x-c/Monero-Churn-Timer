@@ -2,11 +2,11 @@
 
 Welcome to **Monero Churn Timer** — a utility designed to generate randomized wait times for Monero (XMR) transactions, helping you schedule transaction "churns" for enhanced privacy.
 
+**Live Demo:** [Monero Churn Timer](https://m-a-x-c.github.io/Monero-Churn-Timer/churn.html)
+
 ## 📌 Overview
 
 The Monero Churn Timer leverages data collected from a random sample of **100,000 Monero transactions** (between blocks 2.75 million and 3.25 million) to determine the **age distribution of decoys**. Using this sample, a **lognormal distribution** was fitted to simulate realistic wait times for future churns. While the generated distribution isn’t an exact match, it closely approximates real-world decoy usage patterns.
-
-**Live Demo:** [Monero Churn Timer](https://m-a-x-c.github.io/Monero-Churn-Timer/churn.html)
 
 ## 🚀 How It Works
 
